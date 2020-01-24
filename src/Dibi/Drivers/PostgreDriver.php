@@ -66,7 +66,7 @@ class PostgreDriver implements Dibi\Driver
 			set_error_handler(function (int $severity, string $message) use (&$error) {
 				$error = $message;
 			});
-			if (empty($config['persistent'])) {
+			if (isset($config['persistent']) && !$config['persistent']) {
 				$this->connection = pg_connect($string, PGSQL_CONNECT_FORCE_NEW);
 			} else {
 				$this->connection = pg_pconnect($string);
